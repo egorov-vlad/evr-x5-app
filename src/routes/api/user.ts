@@ -103,6 +103,7 @@ router.get('/:id', validateGetUser, getUserById);
  *          rpmId: 
  *            type: string
  *            description: RPM id after create model
+ *            required: true
  *    requestBody:
  *      required: true
  *      content:

@@ -20,7 +20,7 @@ const swaggerOption: swaggerJSDoc.Options = {
       version: "1.0.0",
     },
     swagger: "2.0",
-    basePath: "/api/v1",
+    basePath: "/api",
     produces: [
       "application/json",
     ],
@@ -41,6 +41,8 @@ app.use(helmet())
 app.use(cors({
   origin: '*',
 }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(OpenApiSpecification));
 app.use('/api', api);
 
