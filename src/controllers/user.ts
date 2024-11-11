@@ -53,6 +53,10 @@ export const createUser = async (req: Request, res: Response) => {
 
     res.status(201).send({ user: newUser })
   } catch (err) {
+    if (err instanceof Error && err.message.includes('E11000')) {
+      res.status(409).send({ message: 'User already exists' });
+      return;
+    }
     console.log(err);
     res.status(500).send({ message: 'Internal server error' });
   }
