@@ -32,12 +32,22 @@ const swaggerOption: swaggerJSDoc.Options = {
       }
     ]
   },
-  apis: ["./src/routes/*.ts", "./src/routes/api/*.ts"],
+  apis: ["./src/routes/api/*.ts"],
 }
 
 const OpenApiSpecification = swaggerJSDoc(swaggerOption);
 
-app.use(helmet())
+app.use(helmet(
+  {
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "script-src": ["'self'", "'unsafe-inline'", "example.com"],
+      },
+    },
+  })
+)
+
 app.use(cors({
   origin: '*',
 }));

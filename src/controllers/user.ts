@@ -2,13 +2,13 @@ import { Request, Response } from 'express';
 import userModel from '../models/user.model';
 
 
-export const getUserById = (req: Request, res: Response) => {
+export const getUserById = async (req: Request, res: Response) => {
 
   const { id } = req.params;
 
   try {
 
-    const user = userModel.find({ chatId: id });
+    const user = await userModel.findOne({ chatId: +id });
 
     if (!user) {
       res.status(404).send({ message: 'User not found' });
@@ -27,8 +27,7 @@ export const createUser = async (req: Request, res: Response) => {
   let { chatId, lastName, firstName, avatarUrl, modelUrl, rpmId } = req.body;
 
   try {
-    const user = await userModel.find({ chatId: chatId });
-
+    const user = await userModel.findOne({ chatId: chatId });
     if (user) {
       res.status(400).send({ message: 'User already exists' });
       return;

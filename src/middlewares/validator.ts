@@ -2,17 +2,16 @@ import { Joi, Segments, celebrate } from 'celebrate';
 
 export const validateGetUser = celebrate({
   [Segments.PARAMS]: {
-    id: Joi.number().required(),
+    id: Joi.string().required(),
   },
 });
 
 
 export const validateCreateUser = celebrate({
   [Segments.BODY]: {
-    name: Joi.string().required(),
     chatId: Joi.number().required(),
-    lastName: Joi.string().optional(),
-    firstName: Joi.string().optional(),
+    lastName: Joi.string().required(),
+    firstName: Joi.string().required(),
     avatarUrl: Joi.string().optional(),
     modelUrl: Joi.string().optional(),
     rpmId: Joi.string().required(),
