@@ -1,0 +1,12 @@
+services:
+  backend:
+    restart: always
+    build:
+      context: .
+      args:
+        PORT: ${PORT}
+        MONGODB_URI: ${MONGODB_URI}
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
