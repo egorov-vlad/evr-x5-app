@@ -16,7 +16,7 @@ const userSchema = new Schema<IUser>({
   },
   lastName: {
     type: String,
-    required: true
+    required: false
   },
   chatId: {
     type: Number,

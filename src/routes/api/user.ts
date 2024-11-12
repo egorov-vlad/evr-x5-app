@@ -95,7 +95,6 @@ router.get('/:id', validateGetUser, getUserById);
  *          lastName:
  *            type: string
  *            description: User last name
- *            required: true
  *            example: Doe
  *          avatarUrl:
  *            type: string

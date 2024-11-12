@@ -10,8 +10,8 @@ export const validateGetUser = celebrate({
 export const validateCreateUser = celebrate({
   [Segments.BODY]: {
     chatId: Joi.number().required(),
-    lastName: Joi.string().required(),
     firstName: Joi.string().required(),
+    lastName: Joi.string().optional(),
     avatarUrl: Joi.string().optional(),
     modelUrl: Joi.string().optional(),
     rpmId: Joi.string().required(),

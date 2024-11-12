@@ -29,11 +29,18 @@ export const createUser = async (req: Request, res: Response) => {
   try {
     const user = await userModel.findOne({ chatId: chatId });
     if (user) {
-      res.status(400).send({ message: 'User already exists' });
+      await userModel.updateOne({ chatId: chatId }, {
+        lastName: lastName || user.lastName,
+        firstName: firstName || user.firstName,
+        avatarUrl: avatarUrl || user.avatarUrl,
+        modelUrl: modelUrl || user.modelUrl,
+        rpmId: rpmId || user.rpmId 
+      }, { runValidators: true });
+
+      res.send({ user });
       return;
     }
 
-    //https://models.readyplayer.me/672b3f58edf777e52bdcdf45.glb
     if (!modelUrl && rpmId) {
       modelUrl = `https://models.readyplayer.me/${rpmId}.glb`
     }
