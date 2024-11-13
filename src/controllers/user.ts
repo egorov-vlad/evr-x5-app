@@ -46,7 +46,7 @@ export const createUser = async (req: Request, res: Response) => {
     }
 
     if (!avatarUrl && rpmId) {
-      avatarUrl = `https://models.readyplayer.me/${rpmId}.png?scene=fullbody-portrait-closeupfront;`
+      avatarUrl = `https://models.readyplayer.me/${rpmId}.png?scene=fullbody-portrait-closeupfront`
     }
 
     const newUser = await userModel.create({

@@ -1,6 +1,6 @@
 import http from "node:http";
 import express from 'express';
-import WebSocket from 'ws'
+
 import { connect } from 'mongoose';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -10,6 +10,7 @@ import swaggerUi from "swagger-ui-express";
 
 import api from './routes'
 import { MONGODB_URI, PORT } from './config';
+import { createServer } from './utils/socket';
 
 const app = express();
 
@@ -59,16 +60,7 @@ app.use('/api', api);
 app.use(errors());
 const server = http.createServer(app);
 
-const webSocketServer = new WebSocket.Server({ server });
-
-webSocketServer.on('connection', ws => {
-  ws.on('message', m => {
-    webSocketServer.clients.forEach(client => client.send(m));
-  });
-
-
-  ws.send('Hi there, I am a WebSocket server');
-});
+createServer(server);
 
 connect(MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
