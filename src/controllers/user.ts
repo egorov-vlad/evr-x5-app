@@ -28,6 +28,15 @@ export const createUser = async (req: Request, res: Response) => {
 
   try {
     const user = await userModel.findOne({ chatId: chatId });
+
+    if (!modelUrl && rpmId) {
+      modelUrl = `https://models.readyplayer.me/${rpmId}.glb`
+    }
+
+    if (!avatarUrl && rpmId) {
+      avatarUrl = `https://models.readyplayer.me/${rpmId}.png?scene=fullbody-portrait-closeupfront`
+    }
+
     if (user) {
       await userModel.updateOne({ chatId: chatId }, {
         lastName: lastName || user.lastName,
@@ -39,14 +48,6 @@ export const createUser = async (req: Request, res: Response) => {
 
       res.send({ user });
       return;
-    }
-
-    if (!modelUrl && rpmId) {
-      modelUrl = `https://models.readyplayer.me/${rpmId}.glb`
-    }
-
-    if (!avatarUrl && rpmId) {
-      avatarUrl = `https://models.readyplayer.me/${rpmId}.png?scene=fullbody-portrait-closeupfront`
     }
 
     const newUser = await userModel.create({
