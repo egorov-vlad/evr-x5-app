@@ -9,6 +9,8 @@ export const createServer = (server: http.Server) => {
     ws.on('message', (message: WebSocket.RawData) => {
       webSocketServer.clients.forEach(client => client.send(message));
     });
+
+    ws.on('ping', () => ws.pong());
   });
 }
 

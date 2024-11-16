@@ -60,7 +60,6 @@ app.use('/api', api);
 app.use(errors());
 const server = http.createServer(app);
 
-server.timeout = 0;
 
 createServer(server);
 
