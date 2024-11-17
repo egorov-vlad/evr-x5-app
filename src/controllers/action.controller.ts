@@ -19,6 +19,8 @@ export const addNewAction = async (req: Request, res: Response) => {
       user: {
         firstName: user.firstName,
         lastName: user.lastName,
+        userId: user.chatId,
+        rpmId: user.rpmId,
         avatarUrl: user.avatarUrl
       },
       actionName,

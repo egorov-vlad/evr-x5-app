@@ -1,6 +1,16 @@
 import { Request, Response } from 'express';
+
 import userModel from '../models/user.model';
 
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await userModel.find();
+    res.send({ users });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: 'Internal server error' });
+  }
+};
 
 export const getUserById = async (req: Request, res: Response) => {
 
@@ -43,7 +53,7 @@ export const createUser = async (req: Request, res: Response) => {
         firstName: firstName || user.firstName,
         avatarUrl: avatarUrl || user.avatarUrl,
         modelUrl: modelUrl || user.modelUrl,
-        rpmId: rpmId || user.rpmId 
+        rpmId: rpmId || user.rpmId
       }, { runValidators: true });
 
       res.send({ user });

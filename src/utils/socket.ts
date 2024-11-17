@@ -18,6 +18,8 @@ interface IMessageToSocket {
   user: {
     firstName: string;
     lastName?: string;
+    userId: number;
+    rpmId: string;
     avatarUrl: string;
   };
   actionName: string;

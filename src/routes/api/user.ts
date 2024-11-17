@@ -1,9 +1,11 @@
-import { createUser, getUserById } from '../../controllers/user';
-import { validateGetUser, validateCreateUser } from '../../middlewares/validator';
 import { Router } from 'express';
+
+import { createUser, getAllUsers, getUserById } from '../../controllers/user';
+import { validateGetUser, validateCreateUser } from '../../middlewares/validator';
 
 const router = Router();
 
+router.get('/', getAllUsers);
 /**
  * @openapi
  * /user/{id}:
