@@ -10,3 +10,27 @@ services:
       - .env
     ports:
       - ${PORT}:${PORT}
+    networks:
+      - internal
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongo
+  mongo:
+    restart: always
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - db:/data/db
+    networks:
+      - internal
+
+volumes:
+  db:
+
+networks:
+  internal:
