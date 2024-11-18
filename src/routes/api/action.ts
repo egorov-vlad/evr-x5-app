@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addNewAction } from '../../controllers/action.controller'
+import { addNewAction, saveStatisticsToFile } from '../../controllers/action.controller'
 import { validateAction } from '../../middlewares/validator';
 
 const router = Router();
@@ -62,5 +62,7 @@ const router = Router();
  *        description: Internal server error
  */
 router.post('/', validateAction, addNewAction);
+
+router.post('/save', saveStatisticsToFile);
 
 export default router;
