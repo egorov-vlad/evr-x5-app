@@ -10,7 +10,5 @@ services:
       - .env
     ports:
       - ${PORT}:${PORT}
-    networks:
-      - internal
     volumes:
       - ./:/app
