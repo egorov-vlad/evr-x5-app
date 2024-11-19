@@ -79,3 +79,16 @@ export const createUser = async (req: Request, res: Response) => {
     res.status(500).send({ message: 'Internal server error' });
   }
 }
+
+
+export const deleteUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    await userModel.deleteOne({ chatId: +id });
+    res.send({ message: 'User deleted' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: 'Internal server error' });
+  }
+}

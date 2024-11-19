@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { createUser, getAllUsers, getUserById } from '../../controllers/user';
+import { createUser, deleteUser, getAllUsers, getUserById } from '../../controllers/user';
 import { validateGetUser, validateCreateUser } from '../../middlewares/validator';
 
 const router = Router();
@@ -159,5 +159,6 @@ router.get('/:id', validateGetUser, getUserById);
  */
 router.post('/', validateCreateUser, createUser);
 
+router.delete('/:id', deleteUser)
 
 export default router;
