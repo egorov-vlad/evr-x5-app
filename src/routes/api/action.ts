@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addNewAction, saveStatisticsToFile } from '../../controllers/action.controller'
+import { addNewAction, clearStatistics, saveStatisticsToFile } from '../../controllers/action.controller'
 import { validateAction } from '../../middlewares/validator';
 
 const router = Router();
@@ -64,5 +64,7 @@ const router = Router();
 router.post('/', validateAction, addNewAction);
 
 router.post('/save', saveStatisticsToFile);
+
+router.post('/clear', clearStatistics);
 
 export default router;

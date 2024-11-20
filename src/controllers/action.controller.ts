@@ -3,7 +3,9 @@ import path from 'path';
 import fs from 'fs';
 import statisticModel from '../models/statistic.model';
 import userModel from '../models/user.model';
+
 import { sendMessageToSocket } from '../utils/socket';
+import { API_KEY } from '../config';
 
 export const addNewAction = async (req: Request, res: Response) => {
 
@@ -58,6 +60,22 @@ export const saveStatisticsToFile = async (req: Request, res: Response) => {
     fs.writeFileSync(path.resolve(__dirname, '../../statistics.json'), JSON.stringify(statistics));
 
     res.send({ message: 'Statistics saved' });
+  }
+  catch (err) {
+    console.log(err);
+    res.status(500).send({ message: 'Internal server error' });
+  }
+}
+
+export const clearStatistics = async (req: Request, res: Response) => {
+  try {
+    if (req.headers['x-api-key'] !== API_KEY) {
+      res.status(401).send({ message: 'Unauthorized' });
+      return;
+    }
+
+    await statisticModel.deleteMany({});
+    res.send({ message: 'Statistics cleared' });
   }
   catch (err) {
     console.log(err);
