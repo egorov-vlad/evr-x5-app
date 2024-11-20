@@ -7,7 +7,7 @@ import { sendMessageToSocket } from '../utils/socket';
 
 export const addNewAction = async (req: Request, res: Response) => {
 
-  const { chatId, actionName, firstName, lastName, actionValue, lobbyId } = req.body;
+  const { chatId, actionName, actionValue, lobbyId } = req.body;
 
   try {
     const user = await userModel.findOne({ chatId: chatId });
@@ -19,8 +19,8 @@ export const addNewAction = async (req: Request, res: Response) => {
 
     sendMessageToSocket({
       user: {
-        firstName: firstName || user.firstName,
-        lastName: lastName || user.lastName,
+        firstName: user.firstName,
+        lastName: user.lastName,
         userId: user.chatId,
         rpmId: user.rpmId,
         avatarUrl: user.avatarUrl

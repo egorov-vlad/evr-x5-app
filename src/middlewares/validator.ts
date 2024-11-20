@@ -21,8 +21,8 @@ export const validateCreateUser = celebrate({
 export const validateAction = celebrate({
   [Segments.BODY]: {
     chatId: Joi.number().required(),
-    firstName: Joi.string().optional(),
-    lastName: Joi.string().optional(),
+    // firstName: Joi.string().optional(),
+    // lastName: Joi.string().optional(),
     actionName: Joi.string().valid(...Object.values(Action)).required(),
     actionValue: Joi.string().optional(),
     lobbyId: Joi.number().required()
