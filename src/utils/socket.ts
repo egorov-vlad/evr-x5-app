@@ -16,11 +16,11 @@ export const createServer = (server: http.Server) => {
 
 interface IMessageToSocket {
   user: {
-    firstName: string;
+    firstName?: string;
     lastName?: string;
     userId: number;
-    rpmId: string;
-    avatarUrl: string;
+    rpmId?: string;
+    avatarUrl?: string;
   };
   actionName: string;
   actionValue?: string;

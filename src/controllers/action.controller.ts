@@ -14,18 +14,18 @@ export const addNewAction = async (req: Request, res: Response) => {
   try {
     const user = await userModel.findOne({ chatId: chatId });
 
-    if (!user) {
-      res.status(404).send({ message: 'User not found' });
-      return;
-    }
+    // if (!user) {
+    //   res.status(404).send({ message: 'User not found' });
+    //   return;
+    // }
 
     sendMessageToSocket({
       user: {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        userId: user.chatId,
-        rpmId: user.rpmId,
-        avatarUrl: user.avatarUrl
+        firstName: user?.firstName || '',
+        lastName: user?.lastName || '',
+        userId: chatId,
+        rpmId: user?.rpmId || '',
+        avatarUrl: user?.avatarUrl || ''
       },
       actionName,
       actionValue,
